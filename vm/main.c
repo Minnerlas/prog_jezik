@@ -13,13 +13,15 @@ int main(){
 				PA1,
 				P2A,
 				SKP,
-				99,
+				10,
 				DBG,
 				SKOK, 
-				1
+				1,
+                HLT,
 		};
 
-		prog[654]=HLT;
+		prog[654]=IZLAZ;
+        prog[655]=0;
 		uram(vm, prog, NRAM);
 
 		pokrenivm(vm, 0);

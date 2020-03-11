@@ -5,8 +5,8 @@ void resetvm(struct vm *vm){
 		vm->r1	= 0;
 		vm->r2	= 0;
 		vm->aku	= 0;
-		vm->sp	= 0;
-		vm->bp	= 0;
+		vm->sp	= NRAM-1;
+		vm->bp	= NRAM-1;
 		vm->ip	= 0;
 		brisistatus(vm);
 }
@@ -195,17 +195,17 @@ int pokrenivm(struct vm *vm, uint16_t adr){
 
 
 						case DBG:
-								printf("r1=%5d, r2=%5d, aku=%5d\n",vm->r1,vm->r2,vm->aku);
+								printf("r1=%5d, r2=%5d, aku=%5d, sp=%5d, bp=%5d, ip=%5d\n",vm->r1,vm->r2,vm->aku,vm->sp,vm->bp,vm->ip);
 								vm->ip++;
 								break;
 
 						case ULAZ:
-								scanf("%d",&vm->ram[vm->ip+1]);
+								scanf("%hd",&(vm->ram[vm->ram[vm->ip+1]]));
 								vm->ip+=2;
 								break;
 
 						case IZLAZ:
-								printf("%d\n",vm->ram[vm->ip+1]);
+								printf("%d\n",vm->ram[vm->ram[vm->ip+1]]);
 								vm->ip+=2;
 								break;
 

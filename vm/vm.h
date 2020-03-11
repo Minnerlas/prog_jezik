@@ -6,12 +6,12 @@
 
 //Makroi
 
-#define BRBIT	(16)
+#define BRBIT	(8*sizeof(registar))
 #define NRAM	(1<<BRBIT)
 
 //Tipovi
 
-typedef uint16_t registar ;
+typedef uint16_t registar;
 
 enum instrukcije{
 		NOP=0,					//NOP	- Bez operacije

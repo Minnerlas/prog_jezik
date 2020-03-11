@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "vm.h"
@@ -15,8 +16,8 @@ int main(){
 				SRP,
 				5,
 				DBG,
-				SKOK, 
-				1,
+				SKOR, 
+				(uint16_t)-8,  //-8
                 HLT,
 		};
 

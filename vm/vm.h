@@ -61,7 +61,7 @@ enum instrukcije{
 		DBG     =((1<<BRBIT)-4),//DBG	- Stampa r1,r2,a
 		ULAZ    =((1<<BRBIT)-3),//ULAZ	- RAM[arg1] postaje ulaz iz stdin
 		IZLAZ   =((1<<BRBIT)-2),//IZLAZ	- Ispisuje RAM[arg1] na stdout
-		HLT     =((1<<BRBIT)-1)	//HLT	- Zaustavlja procesor
+		HLT     =((1<<BRBIT)-1),//HLT	- Zaustavlja procesor
 };
 
 struct vm {

@@ -140,6 +140,10 @@ int pokrenivm(struct vm *vm, registar adr){
 										vm->ip+=2;
 								break;
 
+						case SKOR:
+								vm->ip+=(int16_t)vm->ram[vm->ip+1];
+								break;
+
 						case SRV:
 								if(vm->vece)
 										vm->ip+=(int16_t)vm->ram[vm->ip+1];
@@ -257,6 +261,7 @@ int pokrenivm(struct vm *vm, registar adr){
 								break;
 
 						default:
+                                printf("Nepoznata instrukcija: %d\n",inst);
 								return 0;
 				}
 

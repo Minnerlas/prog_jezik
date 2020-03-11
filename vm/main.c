@@ -6,7 +6,7 @@ int main(){
 		struct vm *vm;
 		vm=malloc(sizeof(struct vm));
 		resetvm(vm);
-		uint16_t prog[NRAM]={
+		registar prog[NRAM]={
 				INK1, 
 				SAB1,
 				P12,

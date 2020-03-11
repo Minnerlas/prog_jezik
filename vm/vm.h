@@ -11,6 +11,8 @@
 
 //Tipovi
 
+typedef uint16_t registar ;
+
 enum instrukcije{
 		NOP=0,					//NOP	- Bez operacije
 		INKA,					//INKA	- aku++
@@ -54,25 +56,25 @@ enum instrukcije{
 };
 
 struct vm {
-	uint16_t r1; 			//R1
-	uint16_t r2;			//R2
-	uint16_t aku;			//Akumulator
-	uint16_t sp;			//Pokazivac na stek
-	uint16_t bp;			//Pokazivac na pocetak trenutnog okvira steka
-	uint16_t ip;			//Pokazicac na instrukciju
+	registar r1; 			//R1
+	registar r2;			//R2
+	registar aku;			//Akumulator
+	registar sp;			//Pokazivac na stek
+	registar bp;			//Pokazivac na pocetak trenutnog okvira steka
+	registar ip;			//Pokazicac na instrukciju
 	unsigned int hlt:1;		//Da li je zaustavljen
 	unsigned int prenos:1;	//Ima li prenosa
 	unsigned int jed:1;		//Da li je jendako
 	unsigned int vece:1;	//Da li je vece
 
-	uint16_t ram[NRAM];
+	registar ram[NRAM];
 };
 
 //Funkcije
 
 void resetvm(struct vm*);
-void uram(struct vm *vm, uint16_t *instrukcije, size_t br);
+void uram(struct vm *vm, registar *instrukcije, size_t br);
 void brisistatus(struct vm *vm);
-int  pokrenivm(struct vm *vm, uint16_t adresa);
+int  pokrenivm(struct vm *vm, registar adresa);
 
 #endif

@@ -52,6 +52,8 @@ int pokrenivm(struct vm *vm, registar adr){
 								vm->ip++;
 								break;
 
+						//Sabiranje
+
 						case SAB1:
 								t=vm->r1+vm->aku;
 								if(t>((1<<BRBIT)-1))
@@ -95,6 +97,9 @@ int pokrenivm(struct vm *vm, registar adr){
 						//POMERANJE
 						//POMERANJE
 
+
+						//Uporedjivanje
+						
 						case UPO1:
 								if(vm->aku == vm->r1)
 										vm->jed=1,vm->vece=0;
@@ -114,6 +119,9 @@ int pokrenivm(struct vm *vm, registar adr){
 										vm->jed=0,vm->vece=0;
 								vm->ip++;
 								break;
+
+
+						//Skokovi
 
 						case SKOK:
 								vm->ip=vm->ram[vm->ip+1];
@@ -140,6 +148,9 @@ int pokrenivm(struct vm *vm, registar adr){
 										vm->ip+=2;
 								break;
 
+
+						//Relativni skokovi
+
 						case SKOR:
 								vm->ip+=(int16_t)vm->ram[vm->ip+1];
 								break;
@@ -165,6 +176,9 @@ int pokrenivm(struct vm *vm, registar adr){
 										vm->ip+=2;
 								break;
 
+
+						//Ucitavanje iz memorije
+
 						case UC1:
 								arg1=vm->ram[vm->ip+1];
 								vm->r1=vm->ram[arg1];
@@ -186,6 +200,9 @@ int pokrenivm(struct vm *vm, registar adr){
 								vm->r2=vm->ram[vm->ip+1];
 								vm->ip+=2;
 								break;
+
+
+						//Premestanje iz registra u registar
 
 						case PA1:
 								vm->r1=vm->aku;

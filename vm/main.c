@@ -17,7 +17,7 @@ int main(){
 				5,
 				DBG,
 				SKOR, 
-				(uint16_t)-8,  //-8
+				-8,
                 HLT,
 		};
 

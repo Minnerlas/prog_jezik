@@ -17,7 +17,7 @@ int main(){
 				5,
 				DBG,
 				SKOR, 
-				-8,
+				-7,
                 HLT,
 		};
 

@@ -1,4 +1,5 @@
 #include "vm.h"
+#include <stdint.h>
 #include <stdio.h>
 
 void resetvm(struct vm *vm){
@@ -135,6 +136,27 @@ int pokrenivm(struct vm *vm, registar adr){
 						case SKP:
 								if(vm->prenos)
 										vm->ip=vm->ram[vm->ip+1];
+								else
+										vm->ip+=2;
+								break;
+
+						case SRV:
+								if(vm->vece)
+										vm->ip+=(int16_t)vm->ram[vm->ip+1];
+								else
+										vm->ip+=2;
+								break;
+
+						case SRJ:
+								if(vm->jed)
+										vm->ip+=(int16_t)vm->ram[vm->ip+1];
+								else
+										vm->ip+=2;
+								break;
+
+						case SRP:
+								if(vm->prenos)
+										vm->ip+=(int16_t)vm->ram[vm->ip+1];
 								else
 										vm->ip+=2;
 								break;

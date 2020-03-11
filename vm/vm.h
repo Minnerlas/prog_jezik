@@ -39,6 +39,10 @@ enum instrukcije{
 		SKV,					//SKV	- vece	?ip=RAM[ip+1]:ip+=2
 		SKJ,					//SKJ	- jed 	?ip=RAM[ip+1]:ip+=2
 		SKP,					//SKP	- prenos?ip=RAM[ip+1]:ip+=2
+		SKOR,					//SKOR	- ip+=(int16_t)RAM[ip+1]
+		SRV,					//SRV	- vece	?ip+=(int16_t)RAM[ip+1]:ip+=2
+		SRJ,					//SRJ	- jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
+		SRP,					//SRP	- prenos?ip+=(int16_t)RAM[ip+1]:ip+=2
 		UC1,					//UC1	- r1=RAM[RAM[ip+1]]
 		UC2,					//UC2	- r2=RAM[RAM[ip+1]]
 		UCO1,					//UCO1	- r1=RAM[ip+1]

@@ -11,8 +11,8 @@ void resetvm(struct vm *vm){
 		brisistatus(vm);
 }
 
-void uram(struct vm *vm, uint16_t *inst, size_t br){
-		uint16_t *p= vm->ram;
+void uram(struct vm *vm, registar *inst, size_t br){
+		registar *p= vm->ram;
 		for(size_t i=0; (i<br) && (i<NRAM); *p++=*inst++,i++);
 }
 
@@ -23,10 +23,10 @@ void brisistatus(struct vm *vm){
 		vm->vece   = 0;
 }
 
-int pokrenivm(struct vm *vm, uint16_t adr){
+int pokrenivm(struct vm *vm, registar adr){
 		vm->ip=adr;
 		uint32_t t=0;
-		uint16_t arg1=0;
+		registar arg1=0;
 		enum instrukcije inst;
 		while(!vm->hlt){
 				inst=vm->ram[vm->ip];

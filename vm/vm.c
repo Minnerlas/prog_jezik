@@ -196,7 +196,7 @@ int pokrenivm(struct vm *vm, registar adr){
 
 						case DBG:
 								printf("r1=%5d, r2=%5d, aku=%5d, sp=%5d, bp=%5d, ip=%5d\n",
-									vm->r1,vm->r2,vm->aku,vm->sp,vm->bp,vm->ip);
+									vm->r1, vm->r2, vm->aku, vm->sp, vm->bp, vm->ip);
 								vm->ip++;
 								break;
 

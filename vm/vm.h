@@ -53,6 +53,10 @@ enum instrukcije{
 		P2A,					//P1A	- a=r2
 		P12,					//P12	- r2=r1
 		P21,					//P21	- r1=r2
+		PAS,					//PAS	- sp=a
+		PSA,					//PSA	- a=sp
+		PAB,					//PAB	- bp=a
+		PBA,					//PBA	- a=bp
 
 		DBG     =((1<<BRBIT)-4),//DBG	- Stampa r1,r2,a
 		ULAZ    =((1<<BRBIT)-3),//ULAZ	- RAM[arg1] postaje ulaz iz stdin

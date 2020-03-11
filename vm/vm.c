@@ -213,6 +213,26 @@ int pokrenivm(struct vm *vm, registar adr){
 								vm->ip++;
 								break;
 
+						case PAS:
+								vm->sp=vm->aku;
+								vm->ip++;
+								break;
+
+						case PSA:
+								vm->aku=vm->sp;
+								vm->ip++;
+								break;
+
+						case PAB:
+								vm->bp=vm->aku;
+								vm->ip++;
+								break;
+
+						case PBA:
+								vm->aku=vm->bp;
+								vm->ip++;
+								break;
+
 
 
 

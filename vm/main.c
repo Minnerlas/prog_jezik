@@ -22,6 +22,8 @@ int main(){
 
 		prog[654]=IZLAZ;
         prog[655]=0;
+        prog[656]=DBG;
+
 		uram(vm, prog, NRAM);
 
 		pokrenivm(vm, 0);

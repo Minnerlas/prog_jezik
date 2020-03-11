@@ -12,6 +12,7 @@
 //Tipovi
 
 typedef uint16_t registar;
+typedef uint32_t regx2;
 
 enum instrukcije{
 		NOP=0,					//NOP	- Bez operacije

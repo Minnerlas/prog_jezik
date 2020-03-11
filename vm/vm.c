@@ -25,7 +25,7 @@ void brisistatus(struct vm *vm){
 
 int pokrenivm(struct vm *vm, registar adr){
 		vm->ip=adr;
-		uint32_t t=0;
+		regx2 t=0;
 		registar arg1=0;
 		enum instrukcije inst;
 		while(!vm->hlt){

@@ -24,6 +24,7 @@ int main(){
 	prog[654]=IZLAZ;
 	prog[655]=0;
 	prog[656]=DBG;
+	prog[657]=HLT;
 
 	uram(vm, prog, NRAM);
 

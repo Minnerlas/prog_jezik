@@ -27,12 +27,12 @@ enum instrukcije{
 	ODU2,					//ODU2	- a-=r2
 	ODP1,					//ODP1	- a-=(r1+prenos)
 	ODP2,					//ODP2	- a-=(r2+prenos)
-	PLA,					//PLA	- a	 <<= arg1
-	PL1,					//PL1	- r1 <<= arg1
-	PL2,					//PL2	- r2 <<= arg1
-	PDA,					//PDA	- a	 >>= arg1
-	PD1,					//PD1	- r1 >>= arg1
-	PD2,					//PD2	- r2 >>= arg1
+	PLA,					//PLA	- a	 <<= 1
+	PL1,					//PL1	- r1 <<= 1
+	PL2,					//PL2	- r2 <<= 1
+	PDA,					//PDA	- a	 >>= 1
+	PD1,					//PD1	- r1 >>= 1
+	PD2,					//PD2	- r2 >>= 1
 	UPO1,					//UPO1	- a==r1?jed=1 a>r1?vece=1
 	UPO2,					//UPO2	- a==r2?jed=1 a>r2?vece=1
 	BRZ,					//BRZ	- prenos=vece=jed=0
@@ -44,8 +44,10 @@ enum instrukcije{
 	SRV,					//SRV	- vece	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRJ,					//SRJ	- jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRP,					//SRP	- prenos?ip+=(int16_t)RAM[ip+1]:ip+=2
+	UCA,					//UCA	- a	=RAM[RAM[ip+1]]
 	UC1,					//UC1	- r1=RAM[RAM[ip+1]]
 	UC2,					//UC2	- r2=RAM[RAM[ip+1]]
+	UCOA,					//UCA	- a	=RAM[ip+1]
 	UCO1,					//UCO1	- r1=RAM[ip+1]
 	UCO2,					//UCO2	- r2=RAM[ip+1]
 	PA1,					//PA1	- r1=a

@@ -93,15 +93,80 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 				//ODUZIMANJE
-				//ODUZIMANJE
-				//ODUZIMANJE
-				//ODUZIMANJE
 
+			case ODU1:
+				vm->prenos= vm->aku < vm->r1 ?1:0;
+				vm->aku-=vm->r1;
+				vm->ip++;
+				break;
+
+			case ODU2:
+				vm->prenos= vm->aku < vm->r2 ?1:0;
+				vm->aku-=vm->r2;
+				vm->ip++;
+				break;
+
+			case ODP1:
+				vm->prenos= vm->aku < vm->r1 ?1:0;
+				vm->aku-=(vm->r1+vm->prenos);
+				vm->ip++;
+				break;
+
+			case ODP2:
+				vm->prenos= vm->aku < vm->r2 ?1:0;
+				vm->aku-=(vm->r2+vm->prenos);
+				vm->ip++;
+				break;
 
 				//POMERANJE
-				//POMERANJE
-				//POMERANJE
-				//POMERANJE
+
+			case PLA:
+				arg1=vm->prenos;
+				vm->prenos=vm->aku & (1<<(BRBIT-1))?1:0;
+				vm->aku<<=1;
+				vm->aku+=arg1;
+				vm->ip++;
+				break;
+
+			case PL1:
+				arg1=vm->prenos;
+				vm->prenos=vm->r1 & (1<<(BRBIT-1))?1:0;
+				vm->r1<<=1;
+				vm->r1+=arg1;
+				vm->ip++;
+				break;
+
+			case PL2:
+				arg1=vm->prenos;
+				vm->prenos=vm->r2 & (1<<(BRBIT-1))?1:0;
+				vm->r2<<=1;
+				vm->r2+=arg1;
+				vm->ip++;
+				break;
+
+			case PDA:
+				arg1=vm->prenos;
+				vm->prenos=vm->aku & 0x1 ?1:0;
+				vm->aku>>=1;
+				vm->aku+=((1<<BRBIT-1)*arg1);
+				vm->ip++;
+				break;
+
+			case PD1:
+				arg1=vm->prenos;
+				vm->prenos=vm->r1 & 0x1 ?1:0;
+				vm->r1>>=1;
+				vm->r1+=((1<<BRBIT-1)*arg1);
+				vm->ip++;
+				break;
+
+			case PD2:
+				arg1=vm->prenos;
+				vm->prenos=vm->r2 & 0x1 ?1:0;
+				vm->r2>>=1;
+				vm->r2+=((1<<BRBIT-1)*arg1);
+				vm->ip++;
+				break;
 
 
 				//Uporedjivanje
@@ -128,6 +193,7 @@ int pokrenivm(struct vm *vm, registar adr){
 
 			case BRZ:
 				brzast(vm);
+				vm->ip++;
 				break;
 
 				//Skokovi
@@ -188,6 +254,12 @@ int pokrenivm(struct vm *vm, registar adr){
 
 				//Ucitavanje iz memorije
 
+			case UCA:
+				arg1=vm->ram[vm->ip+1];
+				vm->aku=vm->ram[arg1];
+				vm->ip+=2;
+				break;
+
 			case UC1:
 				arg1=vm->ram[vm->ip+1];
 				vm->r1=vm->ram[arg1];
@@ -197,6 +269,11 @@ int pokrenivm(struct vm *vm, registar adr){
 			case UC2:
 				arg1=vm->ram[vm->ip+1];
 				vm->r2=vm->ram[arg1];
+				vm->ip+=2;
+				break;
+
+			case UCOA:
+				vm->aku=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 

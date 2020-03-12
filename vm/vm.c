@@ -92,7 +92,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
-				//ODUZIMANJE
+				//Oduzimanje
 
 			case ODU1:
 				vm->prenos= vm->aku < vm->r1 ?1:0;
@@ -118,7 +118,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
-				//POMERANJE
+				//Pomeranje
 
 			case PLA:
 				arg1=vm->prenos;
@@ -223,7 +223,6 @@ int pokrenivm(struct vm *vm, registar adr){
 					vm->ip+=2;
 				break;
 
-
 				//Relativni skokovi
 
 			case SKOR:
@@ -251,43 +250,56 @@ int pokrenivm(struct vm *vm, registar adr){
 					vm->ip+=2;
 				break;
 
-
 				//Ucitavanje iz memorije
 
-			case UCA:
+			case URA:
 				arg1=vm->ram[vm->ip+1];
 				vm->aku=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case UC1:
+			case UR1:
 				arg1=vm->ram[vm->ip+1];
 				vm->r1=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case UC2:
+			case UR2:
 				arg1=vm->ram[vm->ip+1];
 				vm->r2=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case UCOA:
+			case URAO:
 				vm->aku=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 
-			case UCO1:
+			case UR1O:
 				vm->r1=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 
-			case UCO2:
+			case UR2O:
 				vm->r2=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 
+			case UAR:
+				vm->ram[vm->ip+1]=vm->aku;
+				vm->ip+=2;
+				break;
 
+			case U1R:
+				vm->ram[vm->ip+1]=vm->r1;
+				vm->ip+=2;
+				break;
+
+			case U2R:
+				vm->ram[vm->ip+1]=vm->r2;
+				vm->ip+=2;
+				break;
+				
 				//Premestanje iz registra u registar
 
 			case PA1:

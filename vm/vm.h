@@ -44,12 +44,15 @@ enum instrukcije{
 	SRV,					//SRV	- vece	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRJ,					//SRJ	- jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRP,					//SRP	- prenos?ip+=(int16_t)RAM[ip+1]:ip+=2
-	UCA,					//UCA	- a	=RAM[RAM[ip+1]]
-	UC1,					//UC1	- r1=RAM[RAM[ip+1]]
-	UC2,					//UC2	- r2=RAM[RAM[ip+1]]
-	UCOA,					//UCA	- a	=RAM[ip+1]
-	UCO1,					//UCO1	- r1=RAM[ip+1]
-	UCO2,					//UCO2	- r2=RAM[ip+1]
+	URA,					//UCA	- a	=RAM[RAM[ip+1]]
+	UR1,					//UC1	- r1=RAM[RAM[ip+1]]
+	UR2,					//UC2	- r2=RAM[RAM[ip+1]]
+	URAO,					//UCA	- a	=RAM[ip+1]
+	UR1O,					//UCO1	- r1=RAM[ip+1]
+	UR2O,					//UCO2	- r2=RAM[ip+1]
+	UAR,					//UAR	- RAM[ip+1]=a
+	U1R,					//U1R	- RAM[ip+1]=r1
+	U2R,					//U2R	- RAM[ip+1]=r2
 	PA1,					//PA1	- r1=a
 	PA2,					//PA1	- r2=a
 	P1A,					//P1A	- a=r1

@@ -53,6 +53,7 @@ enum instrukcije{
 	UAR,					//UAR	- RAM[ip+1]=a
 	U1R,					//U1R	- RAM[ip+1]=r1
 	U2R,					//U2R	- RAM[ip+1]=r2
+	
 	PA1,					//PA1	- r1=a
 	PA2,					//PA1	- r2=a
 	P1A,					//P1A	- a=r1

@@ -19,6 +19,7 @@ int main(){
 		SKOR, 
 		-7,
 		HLT,
+		HLT,
 	};
 
 	prog[654]=IZLAZ;

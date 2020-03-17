@@ -62,8 +62,8 @@ enum instrukcije{
 	UC2O,					//UC2O	- r2=RAM[ip+1]
 	UCAA,					//UCAA	- a =RAM[a]
 	UC1A,					//UC1A	- r1=RAM[a]
-
 	UC2A,					//UC2A	- r2=RAM[a]
+
 	UAR,					//UAR	- RAM[ip+1]=a
 	U1R,					//U1R	- RAM[ip+1]=r1
 	U2R,					//U2R	- RAM[ip+1]=r2
@@ -82,6 +82,7 @@ enum instrukcije{
 	PBA,					//PBA	- a=bp
 	PSB,					//PSB	- sp=bp
 	PBS,					//PBS	- bp=sp
+
 
 
 	DODA,					//DODA	- RAM[--sp]=a

@@ -325,12 +325,12 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
-				//U ram
-
 			case UC2A:
 				vm->r2=vm->ram[vm->aku];
 				vm->ip++;
 				break;
+
+				//U ram
 
 			case UAR:
 				vm->ram[vm->ip+1]=vm->aku;
@@ -347,6 +347,16 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip+=2;
 				break;
 				
+			case U1RA:
+				vm->ram[vm->aku]=vm->r1;
+				vm->ip++;
+				break;
+				
+			case U2RA:
+				vm->ram[vm->aku]=vm->r2;
+				vm->ip++;
+				break;
+
 				//Premestanje iz registra u registar
 
 			case PA1:

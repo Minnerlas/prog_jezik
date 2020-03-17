@@ -76,6 +76,14 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+			case SABR:
+				t=vm->aku+vm->ram[vm->ip+1];
+				if(t>((1<<BRBIT)-1))
+					vm->prenos=1,t-=((1<<BRBIT)-1);
+				vm->aku=t;
+				vm->ip+=2;
+				break;
+
 			case SPB1:
 				t=vm->r1+vm->aku+vm->prenos;
 				if(t>((1<<BRBIT)-1))
@@ -92,6 +100,14 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+			case SPBR:
+				t=vm->ram[vm->ip]+vm->aku+vm->prenos;
+				if(t>((1<<BRBIT)-1))
+					vm->prenos=1,t-=((1<<BRBIT)-1);
+				vm->aku=t;
+				vm->ip+=2;
+				break;
+
 				//Oduzimanje
 
 			case ODU1:
@@ -106,6 +122,13 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+			case ODUR:
+				arg1=vm->ram[vm->ip];
+				vm->prenos= vm->aku < arg1 ?1:0;
+				vm->aku-=arg1;
+				vm->ip+=2;
+				break;
+
 			case ODP1:
 				vm->prenos= vm->aku < vm->r1 ?1:0;
 				vm->aku-=(vm->r1+vm->prenos);
@@ -116,6 +139,13 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->prenos= vm->aku < vm->r2 ?1:0;
 				vm->aku-=(vm->r2+vm->prenos);
 				vm->ip++;
+				break;
+
+			case ODPR:
+				arg1=vm->ram[vm->ip+1];
+				vm->prenos= vm->aku < arg1 ?1:0;
+				vm->aku-=(arg1+vm->prenos);
+				vm->ip+=2;
 				break;
 
 				//Pomeranje
@@ -252,37 +282,54 @@ int pokrenivm(struct vm *vm, registar adr){
 
 				//Ucitavanje iz memorije
 
-			case URA:
+			case UCA:
 				arg1=vm->ram[vm->ip+1];
 				vm->aku=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case UR1:
+			case UC1:
 				arg1=vm->ram[vm->ip+1];
 				vm->r1=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case UR2:
+			case UC2:
 				arg1=vm->ram[vm->ip+1];
 				vm->r2=vm->ram[arg1];
 				vm->ip+=2;
 				break;
 
-			case URAO:
+			case UCAO:
 				vm->aku=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 
-			case UR1O:
+			case UC1O:
 				vm->r1=vm->ram[vm->ip+1];
 				vm->ip+=2;
 				break;
 
-			case UR2O:
+			case UC2O:
 				vm->r2=vm->ram[vm->ip+1];
 				vm->ip+=2;
+				break;
+
+			case UCAA:
+				vm->aku=vm->ram[vm->aku];
+				vm->ip++;
+				break;
+
+			case UC1A:
+				vm->r1=vm->ram[vm->aku];
+				vm->ip++;
+				break;
+
+				//U ram
+
+			case UC2A:
+				vm->r2=vm->ram[vm->aku];
+				vm->ip++;
 				break;
 
 			case UAR:
@@ -350,6 +397,70 @@ int pokrenivm(struct vm *vm, registar adr){
 			case PBA:
 				vm->aku=vm->bp;
 				vm->ip++;
+				break;
+
+			case PSB:
+				vm->bp=vm->sp;
+				vm->ip++;
+				break;
+
+			case PBS:
+				vm->sp=vm->bp;
+				vm->ip++;
+				break;
+
+				//Operacije na steku
+
+			case DODA:
+				vm->ram[vm->sp--]=vm->aku;
+				vm->ip++;
+				break;
+
+			case DOD1:
+				vm->ram[vm->sp--]=vm->r1;
+				vm->ip++;
+				break;
+
+			case DOD2:
+				vm->ram[vm->sp--]=vm->r2;
+				vm->ip++;
+				break;
+
+			case DODBP:
+				vm->ram[vm->sp--]=vm->bp;
+				vm->ip++;
+				break;
+
+			case VRA:
+				vm->aku=vm->ram[++vm->sp];
+				vm->ip++;
+				break;
+
+			case VR1:
+				vm->r1=vm->ram[++vm->sp];
+				vm->ip++;
+				break;
+
+			case VR2:
+				vm->r2=vm->ram[++vm->sp];
+				vm->ip++;
+				break;
+
+			case VRBP:
+				vm->bp=vm->ram[++vm->sp];
+				vm->ip++;
+				break;
+
+				//Poziv Funkcije
+
+			case FUN:
+				arg1=vm->ram[vm->ip+1];
+				vm->ram[vm->sp--]=vm->ip+2;
+				vm->ip=arg1;
+				break;
+
+			case POV:
+				vm->ip=vm->ram[++vm->sp];
 				break;
 
 

@@ -8,6 +8,8 @@ int main(){
 	vm=malloc(sizeof(struct vm));
 	resetvm(vm);
 	registar prog[NRAM]={
+		FUN,
+		18,
 		INK1, 
 		SAB1,
 		P12,
@@ -19,12 +21,21 @@ int main(){
 		SKOR, 
 		-7,
 		HLT,
-	};
 
-	prog[654]=IZLAZ;
-	prog[655]=0;
-	prog[656]=DBG;
-	prog[657]=HLT;
+		0,
+		0,
+		0,
+		0,
+		IZLAZ,
+		0,
+		DBG,
+		DODA,
+		DBG,
+		VRA,
+		DBG,
+		POV,
+		HLT,
+	};
 
 	uram(vm, prog, NRAM);
 

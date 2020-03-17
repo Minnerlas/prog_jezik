@@ -198,6 +198,12 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+				//Brrisanje statusa
+
+			case BRZ:
+				brzast(vm);
+				vm->ip++;
+				break;
 
 				//Uporedjivanje
 
@@ -218,11 +224,6 @@ int pokrenivm(struct vm *vm, registar adr){
 					vm->jed=0,vm->vece=1;
 				else
 					vm->jed=0,vm->vece=0;
-				vm->ip++;
-				break;
-
-			case BRZ:
-				brzast(vm);
 				vm->ip++;
 				break;
 
@@ -461,7 +462,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
-				//Poziv Funkcije
+				//Poziv funkcije
 
 			case FUN:
 				arg1=vm->ram[vm->ip+1];

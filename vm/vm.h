@@ -45,10 +45,12 @@ enum instrukcije{
 
 	UPO1,					//UPO1	- a==r1?jed=1 a>r1?vece=1
 	UPO2,					//UPO2	- a==r2?jed=1 a>r2?vece=1
+
 	SKOK,					//SKOK	- ip=RAM[ip+1]
 	SKV,					//SKV	- vece	?ip=RAM[ip+1]:ip+=2
 	SKJ,					//SKJ	- jed 	?ip=RAM[ip+1]:ip+=2
 	SKP,					//SKP	- prenos?ip=RAM[ip+1]:ip+=2
+
 	SKOR,					//SKOR	- ip+=(int16_t)RAM[ip+1]
 	SRV,					//SRV	- vece	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRJ,					//SRJ	- jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
@@ -83,12 +85,11 @@ enum instrukcije{
 	PSB,					//PSB	- sp=bp
 	PBS,					//PBS	- bp=sp
 
-
-
 	DODA,					//DODA	- RAM[--sp]=a
 	DOD1,					//DOD1	- RAM[--sp]=r1
 	DOD2,					//DOD2	- RAM[--sp]=r2
 	DODBP,					//DODBP	- RAM[--sp]=bp
+
 	VRA,					//VRA	- a =RAM[sp++]
 	VR1,					//VR1	- r1=RAM[sp++]
 	VR2,					//VR2	- r2=RAM[sp++]

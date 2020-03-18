@@ -123,7 +123,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 			case ODUR:
-				arg1=vm->ram[vm->ip];
+				arg1=vm->ram[vm->ip+1];
 				vm->prenos= vm->aku < arg1 ?1:0;
 				vm->aku-=arg1;
 				vm->ip+=2;
@@ -227,6 +227,17 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+			case UPOR:
+				arg1=vm->ram[vm->ip+1];
+				if(vm->aku == arg1)
+					vm->jed=1,vm->vece=0;
+				else if(vm->aku>arg1)
+					vm->jed=0,vm->vece=1;
+				else
+					vm->jed=0,vm->vece=0;
+				vm->ip+=2;
+				break;
+
 				//Skokovi
 
 			case SKOK:
@@ -242,6 +253,13 @@ int pokrenivm(struct vm *vm, registar adr){
 
 			case SKJ:
 				if(vm->jed)
+					vm->ip=vm->ram[vm->ip+1];
+				else
+					vm->ip+=2;
+				break;
+
+			case SKN:
+				if(!vm->jed)
 					vm->ip=vm->ram[vm->ip+1];
 				else
 					vm->ip+=2;
@@ -269,6 +287,13 @@ int pokrenivm(struct vm *vm, registar adr){
 
 			case SRJ:
 				if(vm->jed)
+					vm->ip+=(int16_t)vm->ram[vm->ip+1];
+				else
+					vm->ip+=2;
+				break;
+
+			case SRN:
+				if(!vm->jed)
 					vm->ip+=(int16_t)vm->ram[vm->ip+1];
 				else
 					vm->ip+=2;
@@ -499,7 +524,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 			default:
-				printf("Nepoznata instrukcija: %d\n",inst);
+				printf("Nepoznata instrukcija: %d, na adresi %hd\n", inst, vm->ip);
 				return 0;
 		}
 

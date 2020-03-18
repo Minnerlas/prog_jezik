@@ -43,17 +43,20 @@ enum instrukcije{
 
 	BRZ,					//BRZ	- prenos=vece=jed=0
 
-	UPO1,					//UPO1	- a==r1?jed=1 a>r1?vece=1
-	UPO2,					//UPO2	- a==r2?jed=1 a>r2?vece=1
+	UPO1,					//UPO1	- a==r1?jed=1:a>r1?vece=1
+	UPO2,					//UPO2	- a==r2?jed=1:a>r2?vece=1
+	UPOR,					//UPOR	- 
 
 	SKOK,					//SKOK	- ip=RAM[ip+1]
 	SKV,					//SKV	- vece	?ip=RAM[ip+1]:ip+=2
 	SKJ,					//SKJ	- jed 	?ip=RAM[ip+1]:ip+=2
+	SKN,					//SKN	- !jed	?ip=RAM[ip+1]:ip+=2
 	SKP,					//SKP	- prenos?ip=RAM[ip+1]:ip+=2
 
 	SKOR,					//SKOR	- ip+=(int16_t)RAM[ip+1]
 	SRV,					//SRV	- vece	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRJ,					//SRJ	- jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
+	SRN,					//SRN	- !jed	?ip+=(int16_t)RAM[ip+1]:ip+=2
 	SRP,					//SRP	- prenos?ip+=(int16_t)RAM[ip+1]:ip+=2
 
 	UCA,					//UCA	- a	=RAM[RAM[ip+1]]

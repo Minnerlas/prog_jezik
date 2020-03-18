@@ -7,9 +7,8 @@ int main(){
 	struct vm *vm;
 	vm=malloc(sizeof(struct vm));
 	resetvm(vm);
+	/*
 	registar prog[NRAM]={
-		FUN,
-		18,
 		INK1, 
 		SAB1,
 		P12,
@@ -21,22 +20,59 @@ int main(){
 		SKOR, 
 		-7,
 		HLT,
-
-		0,
-		0,
-		0,
-		0,
-		IZLAZ,
-		0,
-		DBG,
+	};
+	*/
+	registar prog[NRAM]={
+		UCAO,
+		5,
 		DODA,
-		DBG,
+		FUN,
+		8,
 		VRA,
-		DBG,
+		SKOK,
+		590,
+
+		//f(n)
+
+		DODBP,
+		PSB,
+
+		PSA,
+		SABR,
+		3,
+		UCAA,
+		UPOR,
+		1,
+		SRN,
+		7,//kraj
+		UC2O,
+		1,
+		PBS,
+		VRBP,
 		POV,
-		HLT,
+
+		DODA,
+		ODUR,
+		1,
+		DODA,
+		FUN,
+		8,
+		VRA,
+		VRA,
+		SAB2,
+
+
+		PA2,
+		PBS,
+		VRBP,
+		//DBG,
+		POV,
+
+
 	};
 
+	prog[599]=DBG;
+	prog[600]=HLT;
 	uram(vm, prog, NRAM);
 
 	pokrenivm(vm, 0);

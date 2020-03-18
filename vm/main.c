@@ -1,83 +1,47 @@
-#include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "vm.h"
 
-int main(){
-	struct vm *vm;
-	vm=malloc(sizeof(struct vm));
+int main(int argc, const char* argv[]){
+
+	char ulaz[20]={0};
+	int stdulaz=1;
+
+	for(int i=1; i<argc; i++){
+		if(argv[i][0]=='-')
+			switch(argv[i][1]){
+				case 'o':
+				default:
+					printf("Nepoznata komanda: %s.\n",argv[i]);
+					exit(1);
+			}
+		else{
+			stdulaz=0;
+			strcpy(ulaz,argv[i]);
+		}
+	}
+
+	registar prog[NRAM]={0};
+	prog[NRAM-1]=HLT;
+
+	if(!stdulaz){
+		registar *t=prog;
+		FILE *fp=fopen(ulaz, "r");
+		while(fscanf(fp, "%x\n", t++)!=EOF);
+		fclose(fp);
+	}else{
+		registar *t=prog;
+		while(scanf("%x\n",t++)!=EOF);
+	}
+
+	struct vm *vm=malloc(sizeof(struct vm));
 	resetvm(vm);
-	/*
-	registar prog[NRAM]={
-		INK1, 
-		SAB1,
-		P12,
-		PA1,
-		P2A,
-		SRP,
-		5,
-		DBG,
-		SKOR, 
-		-7,
-		HLT,
-	};
-	*/
-	registar prog[NRAM]={
-		UCAO,
-		5,
-		DODA,
-		FUN,
-		8,
-		VRA,
-		SKOK,
-		590,
 
-		//f(n)
-
-		DODBP,
-		PSB,
-
-		PSA,
-		SABR,
-		3,
-		UCAA,
-		UPOR,
-		1,
-		SRN,
-		7,//kraj
-		UC2O,
-		1,
-		PBS,
-		VRBP,
-		POV,
-
-		DODA,
-		ODUR,
-		1,
-		DODA,
-		FUN,
-		8,
-		VRA,
-		VRA,
-		SAB2,
-
-
-		PA2,
-		PBS,
-		VRBP,
-		//DBG,
-		POV,
-
-
-	};
-
-	prog[599]=DBG;
-	prog[600]=HLT;
 	uram(vm, prog, NRAM);
 
 	pokrenivm(vm, 0);
 
 	free(vm);
-
 	return 0;
 }

@@ -43,5 +43,6 @@ int main(int argc, const char* argv[]){
 	pokrenivm(vm, 0);
 
 	free(vm);
+
 	return 0;
 }

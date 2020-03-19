@@ -54,7 +54,7 @@ int main(){
 	FILE *fp=fopen("test.prg","w");
 
 	for(int i=0;i<603;i++)
-		fprintf(fp, "%x\n", prog[i]);
+		fprintf(fp, "%x|", prog[i]);
 
 	return 0;
 }

@@ -101,10 +101,12 @@ enum instrukcije{
 	FUN,					//FUN	- gurni ip+2 na stek,ip=RAM[ip+1],bp=sp
 	POV,					//POV	- ip=vrati sa steka,bp=sp 
 
-	DBG     =((1<<BRBIT)-4),//DBG	- Stampa r1,r2,a
-	ULAZ    =((1<<BRBIT)-3),//ULAZ	- RAM[arg1] postaje ulaz iz stdin
-	IZLAZ   =((1<<BRBIT)-2),//IZLAZ	- Ispisuje RAM[arg1] na stdout
-	HLT     =((1<<BRBIT)-1),//HLT	- Zaustavlja procesor
+	DBG		=((1<<BRBIT)-6),//DBG	- Stampa r1,r2,a
+	ULAA	=((1<<BRBIT)-5),//ULAA	- a postaje ulaz sa stdin
+	IZLAA	=((1<<BRBIT)-4),//IZLAA	- Ispisuje a na stdout
+	ULAZ	=((1<<BRBIT)-3),//ULAZ	- RAM[arg1] postaje ulaz iz stdin
+	IZLAZ	=((1<<BRBIT)-2),//IZLAZ	- Ispisuje RAM[arg1] na stdout
+	HLT		=((1<<BRBIT)-1),//HLT	- Zaustavlja procesor
 };
 
 struct vm {

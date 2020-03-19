@@ -508,6 +508,17 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ip++;
 				break;
 
+			case ULAA:
+				printf("ULAZ:  ");
+				scanf("%hd",&(vm->aku));
+				vm->ip++;
+				break;
+
+			case IZLAA:
+				printf("IZLAZ: %hu\n", vm->aku);
+				vm->ip++;
+				break;
+
 			case ULAZ:
 				printf("ULAZ:  ");
 				scanf("%hd",&(vm->ram[vm->ram[vm->ip+1]]));
@@ -515,7 +526,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 			case IZLAZ:
-				printf("IZLAZ: %d\n",vm->ram[vm->ram[vm->ip+1]]);
+				printf("IZLAZ: %hu\n",vm->ram[vm->ram[vm->ip+1]]);
 				vm->ip+=2;
 				break;
 

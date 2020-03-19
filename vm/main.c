@@ -29,12 +29,12 @@ int main(int argc, const char* argv[]){
 		registar *t=prog;
 		int n=0;
 		FILE *fp=fopen(ulaz, "r");
-		while((fscanf(fp, "%x\n", t++)!=EOF)&&(n++<NRAM));
+		while((fscanf(fp, "%x|", t++)!=EOF)&&(n++<NRAM));
 		fclose(fp);
 	}else{
 		registar *t=prog;
 		int n=0;
-		while((scanf("%x\n",t++)!=EOF)&&(n++<NRAM));
+		while((scanf("%x|",t++)!=EOF)&&(n++<NRAM));
 	}
 
 	struct vm *vm=malloc(sizeof(struct vm));

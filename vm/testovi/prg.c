@@ -51,9 +51,9 @@ int main(){
 	prog[599]=IZLAA;
 	prog[600]=HLT;
 
-	FILE *fp=fopen("test2.prg","w");
+	FILE *fp=fopen("test.prg","w");
 
-	for(int i=0;i<NRAM;i++)
+	for(int i=0;i<603;i++)
 		fprintf(fp, "%x\n", prog[i]);
 
 	return 0;

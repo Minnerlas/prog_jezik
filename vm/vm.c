@@ -510,7 +510,7 @@ int pokrenivm(struct vm *vm, registar adr){
 
 			case ULAA:
 				printf("ULAZ:  ");
-				scanf("%hd",&(vm->aku));
+				scanf("%hu",&(vm->aku));
 				vm->ip++;
 				break;
 
@@ -521,7 +521,7 @@ int pokrenivm(struct vm *vm, registar adr){
 
 			case ULAZ:
 				printf("ULAZ:  ");
-				scanf("%hd",&(vm->ram[vm->ram[vm->ip+1]]));
+				scanf("%hu",&(vm->ram[vm->ram[vm->ip+1]]));
 				vm->ip+=2;
 				break;
 
@@ -535,7 +535,7 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 			default:
-				printf("Nepoznata instrukcija: %d, na adresi %hd\n", inst, vm->ip);
+				printf("Nepoznata instrukcija: %hu, na adresi %hu\n", inst, vm->ip);
 				return 0;
 		}
 

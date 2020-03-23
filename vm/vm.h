@@ -132,4 +132,4 @@ void brisistatus(struct vm *vm);
 int  pokrenivm(struct vm *vm, registar adresa);
 void brzast(struct vm *vm);
 
-#endif
+#endif /* VM_H */

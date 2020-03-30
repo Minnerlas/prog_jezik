@@ -1,0 +1,3 @@
+[submodule "razno"]
+	path = razno
+	url = https://github.com/Minnerlas/razno.git

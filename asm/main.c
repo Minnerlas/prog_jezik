@@ -2,11 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../vm/vm.h"
-#include "hmapa.h"
+#include "../razno/hmapa/hmapa.h"
 
 typedef struct {
 
 } asembler;
+
+
+void parsujdir(){
+}
+
+void parsujinst(){
+}
 
 
 int main(int argc, const char* argv[]){
@@ -52,12 +59,18 @@ int main(int argc, const char* argv[]){
 	else
 		ul=fopen(ulaz, "r");
 
-	
+
 	if(stdizlaz)
 		iz=stdout;
 	else
 		iz=fopen(izlaz, "w");
-	
+
+
+
+
+	char c, temp[100]={0}, *t1;
+	struct hmapa *mapa = naphmapa();
+	int adresa=0;
 
 	do {
 		switch(c=fgetc(ul)){
@@ -65,11 +78,43 @@ int main(int argc, const char* argv[]){
 				kraj=1;
 				break;
 
-			case '\t':
+			case '.':								// Uputstva za asembler
+				t1=temp;
+				while((*(t1++)=getchar())!=' ');
+				*(t1-1)='\0';
+				if(!strcmp(temp,"poc")){
+					int br;
+					scanf("%d", &br);
+					printf("poc je %d", br);
+				}else{
+					while(getchar()!='\n');
+					printf("dir:\t%s\n", temp);
+				}
+				parsujdir();
 				break;
 
-			default:
+			case '\t':								// Instrukcije
+				t1=temp;
+				while((*(t1++)=getchar())!='\n');
+				*(t1-1)='\0';
+				printf("inst:\t%s\n", temp);
+				parsujinst();
+				break;
 
+			case '\n':								// Prazan red
+				break;
+
+			default:								// Oznaka
+				temp[0]=c;
+				t1=temp+1;
+				while((*(t1++)=getchar())!='\n');
+				*(t1-1)='\0';
+				if(t1=strchr(temp, ':')){
+					*t1='\0';
+					printf("oznaka:\t%s\n", temp);
+				}
+				//printf("\"%c\"\n", c);
+				break;
 		}
 
 	} while(!kraj);

@@ -1,13 +1,13 @@
 CC = gcc
 LINKERFLAG = -lm
 
-cvm: vm.o main.o
-	${CC} ${LINKERFLAG} vm.o main.o -o cvm
+asem: main.o hmapa.o
+	${CC} ${LINKERFLAG} hmapa.o main.o -o asem
 	rm -rvf *.o
 	rm -rvf *.gch
 
-vm.o: vm.c vm.h
-	${CC} -c vm.c
+hmapa.o: ../razno/hmapa/hmapa.c ../razno/hmapa/hmapa.h
+	${CC} -c ../razno/hmapa/hmapa.c
 
-main.o: main.c vm.h vm.c
+main.o: main.c
 	${CC} -c main.c

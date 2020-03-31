@@ -1,0 +1,2 @@
+pocetak:
+	skor pocetak

@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define DEBAGOVANJE 0
+
 void resetvm(struct vm *vm){
 	vm->r1	= 0;
 	vm->r2	= 0;
@@ -37,7 +39,10 @@ int pokrenivm(struct vm *vm, registar adr){
 	enum instrukcije inst;
 	while(!vm->hlt){
 		inst=vm->ram[vm->ip];
+#if DEBAGOVANJE == 1
+			printf("inst: %d\n", inst);
 		//printf("%d\n",vm->aku);
+#endif
 		switch(inst){
 			case NOP:
 				vm->ip++;

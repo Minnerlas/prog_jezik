@@ -43,9 +43,9 @@ enum instrukcije{
 
 	BRZ,					//BRZ	- prenos=vece=jed=0
 
-	UPO1,					//UPO1	- a==r1?jed=1:a>r1?vece=1
-	UPO2,					//UPO2	- a==r2?jed=1:a>r2?vece=1
-	UPOR,					//UPOR	- 
+	UPO1,					//UPO1	- a==r1  ?jed=1:a>r1  ?vece=1
+	UPO2,					//UPO2	- a==r2  ?jed=1:a>r2  ?vece=1
+	UPOR,					//UPOR	- a==arg1?jed=1:a>arg1?vece=1
 
 	SKOK,					//SKOK	- ip=RAM[ip+1]
 	SKV,					//SKV	- vece	?ip=RAM[ip+1]:ip+=2

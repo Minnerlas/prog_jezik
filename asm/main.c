@@ -226,6 +226,7 @@ int main(int argc, const char* argv[]){
 				}else if(!strncmp(temp, "upor",4)){
 					printf(" inst je %d\n", UPOR);
 					inst[adresa++]=UPOR;
+					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "skok",4)){
 					printf(" inst je %d\n", SKOK);
@@ -272,7 +273,8 @@ int main(int argc, const char* argv[]){
 
 				}else if(!strncmp(temp, "srn",3)){
 					printf(" inst je %d\n", SRN);
-					inst[adresa++]=SRN;
+					inst[adresa]=SRN;
+					adresa++;
 					inst[adresa]=parsujarg(l, temp+4, adresa)-adresa+1;
 					adresa++;
 
@@ -512,11 +514,14 @@ int main(int argc, const char* argv[]){
 	putchar('\n');
 	lstampaj(l);
 
+	if (stdizlaz)
+		goto kraj;
 
 	for(int i=0; i<pocadr+NRAM; i++){
 		fprintf(iz, "%x\n", (uint16_t)inst[i]);
 	}
 
+kraj:
 	if(!stdizlaz)
 		fclose(iz);
 

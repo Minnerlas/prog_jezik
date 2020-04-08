@@ -108,6 +108,12 @@ char *strinst[NRAM] = {
 	"FUN"		,
 	"POV"		,
 
+	[((1<<BRBIT)-6)] = DBG		,
+	[((1<<BRBIT)-5)] = ULAA		,
+	[((1<<BRBIT)-4)] = IZLAA	,
+	[((1<<BRBIT)-3)] = ULAZ		,
+	[((1<<BRBIT)-2)] = IZLAZ	,
+	[((1<<BRBIT)-1)] = HLT		,
 };
 
 #endif

@@ -32,6 +32,86 @@ void brzast(struct vm *vm){
 	vm->vece	= 0;
 }
 
+#if DEBAGOVANJE == 1
+
+char *strinst[NRAM] = {
+	"NOP"		,
+	"INKA"		,
+	"INK1"		,
+	"INK2"		,
+	"SAB1"		,
+	"SAB2"		,
+	"SABR"		,
+	"SPB1"		,
+	"SPB2"		,
+	"SPBR"		,
+	"ODU1"		,
+	"ODU2"		,
+	"ODUR"		,
+	"ODP1"		,
+	"ODP2"		,
+	"ODPR"		,
+	"PLA"		,
+	"PL1"		,
+	"PL2"		,
+	"PDA"		,
+	"PD1"		,
+	"PD2"		,
+	"BRZ"		,
+	"UPO1"		,
+	"UPO2"		,
+	"UPOR"		,
+	"SKOK"		,
+	"SKV"		,
+	"SKJ"		,
+	"SKN"		,
+	"SKP"		,
+	"SKOR"		,
+	"SRV"		,
+	"SRJ"		,
+	"SRN"		,
+	"SRP"		,
+	"UCA"		,
+	"UC1"		,
+	"UC2"		,
+	"UCAO"		,
+	"UC1O"		,
+	"UC2O"		,
+	"UCAA"		,
+	"UC1A"		,
+	"UC2A"		,
+	"UAR"		,
+	"U1R"		,
+	"U2R"		,
+	"U1RA"		,
+	"U2RA"		,
+	"PA1"		,
+	"PA2"		,
+	"P1A"		,
+	"P2A"		,
+	"P12"		,
+	"P21"		,
+	"PAS"		,
+	"PSA"		,
+	"PAB"		,
+	"PBA"		,
+	"PSB"		,
+	"PBS"		,
+	"DODA"		,
+	"DOD1"		,
+	"DOD2"		,
+	"DODBP"		,
+	"VRA"		,
+	"VR1"		,
+	"VR2"		,
+	"VRBP"		,
+	"FUN"		,
+	"POV"		,
+
+};
+
+#endif
+
 int pokrenivm(struct vm *vm, registar adr){
 	vm->ip=adr;
 	regx2 t=0;
@@ -40,7 +120,10 @@ int pokrenivm(struct vm *vm, registar adr){
 	while(!vm->hlt){
 		inst=vm->ram[vm->ip];
 #if DEBAGOVANJE == 1
-			printf("inst: %d\n", inst);
+		//printf("adr: %d inst: %d\n", vm->ip, inst);
+		printf("adr: %d inst: %s\n", vm->ip, strinst[inst]);
+		printf("r1=%5d, r2=%5d, aku=%5d, sp=%5d, bp=%5d, ip=%5d\n",
+				vm->r1, vm->r2, vm->aku, vm->sp, vm->bp, vm->ip);
 		//printf("%d\n",vm->aku);
 #endif
 		switch(inst){
@@ -49,17 +132,26 @@ int pokrenivm(struct vm *vm, registar adr){
 				break;
 
 			case INKA:
-				vm->aku++;
+				t=vm->aku+1;
+				if(t>((1<<BRBIT)-1))
+					vm->prenos=1,t-=((1<<BRBIT)-1);
+				vm->aku=t;
 				vm->ip++;
 				break;
 
 			case INK1:
-				vm->r1++;
+				t=vm->r1+1;
+				if(t>((1<<BRBIT)-1))
+					vm->prenos=1,t-=((1<<BRBIT)-1);
+				vm->r1=t;
 				vm->ip++;
 				break;
 
 			case INK2:
-				vm->r2++;
+				t=vm->r2+1;
+				if(t>((1<<BRBIT)-1))
+					vm->prenos=1,t-=((1<<BRBIT)-1);
+				vm->r2=t;
 				vm->ip++;
 				break;
 
@@ -377,12 +469,12 @@ int pokrenivm(struct vm *vm, registar adr){
 				vm->ram[vm->ip+1]=vm->r2;
 				vm->ip+=2;
 				break;
-				
+
 			case U1RA:
 				vm->ram[vm->aku]=vm->r1;
 				vm->ip++;
 				break;
-				
+
 			case U2RA:
 				vm->ram[vm->aku]=vm->r2;
 				vm->ip++;

@@ -19,7 +19,7 @@ def c():
     _=system("clear")
 
 def greska(linija, tekst):
-    print(f"\n[Linija {linija}] Greška: {tekst}")
+    print(f"[Linija {linija}] Greška: {tekst}")
 
 kljucnereci = {
         # Ključne reči
@@ -64,6 +64,7 @@ def leksiranje(ulaz):
     prvi = 0
     linija = 1
     tokeni = []
+    gr = False
     while(trenutni<len(ulaz)):
         c=ulaz[trenutni]
         if trenutni+1 >= len(ulaz):
@@ -113,7 +114,7 @@ def leksiranje(ulaz):
         elif c == ',':
             tokeni+=[(TipTokena.ZAREZ,linija)]
             trenutni+=1
-        elif c == '¬':
+        elif c == '~':
             tokeni+=[(TipTokena.NEG,linija)]
             trenutni+=1
         elif c == '?':
@@ -205,7 +206,7 @@ def leksiranje(ulaz):
                     if ulaz[trenutni] == '\n':
                         linija+=1
                     trenutni+=1
-                trenutni+=1
+                trenutni+=2
             elif sl == '=':
                 tokeni+=[(TipTokena.KROZJED,linija)]
                 trenutni+=2
@@ -315,11 +316,15 @@ def leksiranje(ulaz):
             tokeni += [(tip, linija, tekst)]
 
         else:
-            print("Greška. "+ulaz[trenutni:trenutni+5])
+            #print("Greška. "+ulaz[trenutni:trenutni+5])
             greska(linija, f"Neočekivani karakter {c}")
             trenutni+=1
+            gr = True
 
-    return tokeni
+    if not gr:
+        return tokeni
+    else:
+        return None
 
 if __name__ == "__main__":
     ul = "test.c"

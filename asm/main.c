@@ -6,6 +6,8 @@
 #include "../vm/vm.h"
 #include "../razno/hmapa/hmapa.h"
 
+#define DEBAGVANJE 1
+
 
 int parsujarg(struct lista* l, const char* t, int adr){
 	int arg;
@@ -514,12 +516,20 @@ int main(int argc, const char* argv[]){
 	putchar('\n');
 	lstampaj(l);
 
+#if DEBAGVANJE != 1
 	if (stdizlaz)
 		goto kraj;
+#endif
 
-	for(int i=0; i<pocadr+NRAM; i++){
+	for(int i=0; i<NRAM; i++){
 		fprintf(iz, "%x\n", (uint16_t)inst[i]);
 	}
+#if DEBAGVANJE == 1
+	putchar('\n');
+	for(int i=0; i<100; i++){
+		printf("%d: %d\n", i, (uint16_t)inst[i]);
+	}
+#endif
 
 kraj:
 	if(!stdizlaz)

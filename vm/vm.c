@@ -4,6 +4,10 @@
 
 #define DEBAGOVANJE 0
 
+#if DEBAGOVANJE == 1
+#include "dbg.h"
+#endif
+
 void resetvm(struct vm *vm){
 	vm->r1	= 0;
 	vm->r2	= 0;
@@ -32,91 +36,6 @@ void brzast(struct vm *vm){
 	vm->vece	= 0;
 }
 
-#if DEBAGOVANJE == 1
-
-char *strinst[NRAM] = {
-	"NOP"		,
-	"INKA"		,
-	"INK1"		,
-	"INK2"		,
-	"SAB1"		,
-	"SAB2"		,
-	"SABR"		,
-	"SPB1"		,
-	"SPB2"		,
-	"SPBR"		,
-	"ODU1"		,
-	"ODU2"		,
-	"ODUR"		,
-	"ODP1"		,
-	"ODP2"		,
-	"ODPR"		,
-	"PLA"		,
-	"PL1"		,
-	"PL2"		,
-	"PDA"		,
-	"PD1"		,
-	"PD2"		,
-	"BRZ"		,
-	"UPO1"		,
-	"UPO2"		,
-	"UPOR"		,
-	"SKOK"		,
-	"SKV"		,
-	"SKJ"		,
-	"SKN"		,
-	"SKP"		,
-	"SKOR"		,
-	"SRV"		,
-	"SRJ"		,
-	"SRN"		,
-	"SRP"		,
-	"UCA"		,
-	"UC1"		,
-	"UC2"		,
-	"UCAO"		,
-	"UC1O"		,
-	"UC2O"		,
-	"UCAA"		,
-	"UC1A"		,
-	"UC2A"		,
-	"UAR"		,
-	"U1R"		,
-	"U2R"		,
-	"U1RA"		,
-	"U2RA"		,
-	"PA1"		,
-	"PA2"		,
-	"P1A"		,
-	"P2A"		,
-	"P12"		,
-	"P21"		,
-	"PAS"		,
-	"PSA"		,
-	"PAB"		,
-	"PBA"		,
-	"PSB"		,
-	"PBS"		,
-	"DODA"		,
-	"DOD1"		,
-	"DOD2"		,
-	"DODBP"		,
-	"VRA"		,
-	"VR1"		,
-	"VR2"		,
-	"VRBP"		,
-	"FUN"		,
-	"POV"		,
-
-	[((1<<BRBIT)-6)] = "DBG"	,
-	[((1<<BRBIT)-5)] = "ULAA"	,
-	[((1<<BRBIT)-4)] = "IZLAA"	,
-	[((1<<BRBIT)-3)] = "ULAZ"	,
-	[((1<<BRBIT)-2)] = "IZLAZ"	,
-	[((1<<BRBIT)-1)] = "HLT"	,
-};
-
-#endif
 
 int pokrenivm(struct vm *vm, registar adr){
 	vm->ip=adr;

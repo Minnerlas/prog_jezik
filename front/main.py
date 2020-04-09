@@ -1,6 +1,14 @@
 #!/bin/python
 from lekser import *
 
+'''
+kval            => 'auto' | 'register' | 'static' |'...' | nista 
+tip             => 'char' | 'int' | 'float' | 'double'
+dekl            => kval* (signed | unsigned)? tip
+argument        => dekl ident
+funkcija_def    => 'static'*  (dekl|'void')  ident  '(' (argument)* ')' ';'
+'''
+
 
 
 if __name__ == "__main__":

@@ -6,14 +6,25 @@
 #include "../vm/vm.h"
 #include "../razno/hmapa/hmapa.h"
 
-#define DEBAGVANJE 1
+#define DEBAGOVANJE 0
 
+#if DEBAGOVANJE == 1
+#include "../vm/dbg.h"
+#endif
+
+#if DEBAGOVANJE == 1
+#define STAMPINST(inst) printf(" inst je %s:\t%d\n", strinst[(inst)], (inst))
+#else 
+#define STAMPINST(inst) (inst)
+#endif
 
 int parsujarg(struct lista* l, const char* t, int adr){
 	int arg;
 	if(isdigit(*t)){
 		sscanf(t, "%d", &arg);
+#if DEBAGOVANJE == 1
 		printf(" arg: %d\n", arg);
+#endif
 		return arg;
 	}else{
 		char* t1=(char*)t;
@@ -98,10 +109,14 @@ int main(int argc, const char* argv[]){
 					int br;
 					fscanf(ul, "%d", &br);
 					pocadr=adresa=br;
+#if DEBAGOVANJE == 1
 					printf("poc je %d\n", pocadr);
+#endif
 				}else{
 					while(fgetc(ul)!='\n');
+#if DEBAGOVANJE == 1
 					printf("dir:\t%s\n", temp);
+#endif
 				}
 				break;
 
@@ -111,359 +126,369 @@ int main(int argc, const char* argv[]){
 				*(t1-1)='\0';
 				for(t1=temp; *t1 && (*t1!=' ') && (*t1!=',');t1++) *t1 = tolower(*t1);
 
+#if DEBAGOVANJE == 1
 				printf("inst:\t%s\n", temp);
+#endif
 
 				if(!strncmp(temp, "nop",3)){
-					printf(" inst je %d\n", NOP);
+					STAMPINST(NOP);
 					inst[adresa++]=NOP;
 
 				}else if(!strncmp(temp, "inka",4)){
-					printf(" inst je %d\n", INKA);
+					STAMPINST(INKA);
 					inst[adresa++]=INKA;
 
 				}else if(!strncmp(temp, "ink1",4)){
-					printf(" inst je %d\n", INK1);
+					STAMPINST(INK1);
 					inst[adresa++]=INK1;
 
 				}else if(!strncmp(temp, "ink2",4)){
-					printf(" inst je %d\n", INK2);
+					STAMPINST(INK2);
 					inst[adresa++]=INK2;
 
 				}else if(!strncmp(temp, "sab1",4)){
-					printf(" inst je %d\n", SAB1);
+					STAMPINST(SAB1);
 					inst[adresa++]=SAB1;
 
 				}else if(!strncmp(temp, "sab2",4)){
-					printf(" inst je %d\n", SAB2);
+					STAMPINST(SAB2);
 					inst[adresa++]=SAB2;
 
 				}else if(!strncmp(temp, "sabr",4)){
-					printf(" inst je %d", SABR);
+					STAMPINST(SABR);
 					inst[adresa++]=SABR;
 					sscanf(temp+5, "%d", &arg);
+#if DEBAGOVANJE == 1
 					printf(" arg: %d\n", arg);
+#endif
 					inst[adresa++]=arg;
 
 				}else if(!strncmp(temp, "spb1",4)){
-					printf(" inst je %d\n", SPB1);
+					STAMPINST(SPB1);
 					inst[adresa++]=SPB1;
 
 				}else if(!strncmp(temp, "spb2",4)){
-					printf(" inst je %d\n", SPB2);
+					STAMPINST(SPB2);
 					inst[adresa++]=SPB2;
 
 				}else if(!strncmp(temp, "spbr",4)){
-					printf(" inst je %d\n", SPBR);
+					STAMPINST(SPBR);
 					inst[adresa++]=SPBR;
 					sscanf(temp+5, "%d", &arg);
+#if DEBAGOVANJE == 1
 					printf(" arg: %d\n", arg);
+#endif
 					inst[adresa++]=arg;
 
 				}else if(!strncmp(temp, "odu1",4)){
-					printf(" inst je %d\n", ODU1);
+					STAMPINST(ODU1);
 					inst[adresa++]=ODU1;
 
 				}else if(!strncmp(temp, "odu2",4)){
-					printf(" inst je %d\n", ODU2);
+					STAMPINST(ODU2);
 					inst[adresa++]=ODU2;
 
 				}else if(!strncmp(temp, "odur",4)){
-					printf(" inst je %d\n", ODUR);
+					STAMPINST(ODUR);
 					inst[adresa++]=ODUR;
 					sscanf(temp+5, "%d", &arg);
+#if DEBAGOVANJE == 1
 					printf(" arg: %d\n", arg);
+#endif
 					inst[adresa++]=arg;
 
 				}else if(!strncmp(temp, "odp1",4)){
-					printf(" inst je %d\n", ODP1);
+					STAMPINST(ODP1);
 					inst[adresa++]=ODP1;
 
 				}else if(!strncmp(temp, "odp2",4)){
-					printf(" inst je %d\n", ODP2);
+					STAMPINST(ODP2);
 					inst[adresa++]=ODP2;
 
 				}else if(!strncmp(temp, "odpr",4)){
-					printf(" inst je %d\n", ODPR);
+					STAMPINST(ODPR);
 					inst[adresa++]=ODPR;
 					sscanf(temp+5, "%d", &arg);
+#if DEBAGOVANJE == 1
 					printf(" arg: %d\n", arg);
+#endif
 					inst[adresa++]=arg;
 
 				}else if(!strncmp(temp, "pla",3)){
-					printf(" inst je %d\n", PLA);
+					STAMPINST(PLA);
 					inst[adresa++]=PLA;
 
 				}else if(!strncmp(temp, "pl1",3)){
-					printf(" inst je %d\n", PL1);
+					STAMPINST(PL1);
 					inst[adresa++]=PL1;
 
 				}else if(!strncmp(temp, "pl2",3)){
-					printf(" inst je %d\n", PL2);
+					STAMPINST(PL2);
 					inst[adresa++]=PL2;
 
 				}else if(!strncmp(temp, "pda",3)){
-					printf(" inst je %d\n", PDA);
+					STAMPINST(PDA);
 					inst[adresa++]=PDA;
 
 				}else if(!strncmp(temp, "pd1",3)){
-					printf(" inst je %d\n", PD1);
+					STAMPINST(PD1);
 					inst[adresa++]=PD1;
 
 				}else if(!strncmp(temp, "pd2",3)){
-					printf(" inst je %d\n", PD2);
+					STAMPINST(PD2);
 					inst[adresa++]=PD2;
 
 				}else if(!strncmp(temp, "brz",3)){
-					printf(" inst je %d\n", BRZ);
+					STAMPINST(BRZ);
 					inst[adresa++]=BRZ;
 
 				}else if(!strncmp(temp, "upo1",4)){
-					printf(" inst je %d\n", UPO1);
+					STAMPINST(UPO1);
 					inst[adresa++]=UPO1;
 
 				}else if(!strncmp(temp, "upo2",4)){
-					printf(" inst je %d\n", UPO2);
+					STAMPINST(UPO2);
 					inst[adresa++]=UPO2;
 
 				}else if(!strncmp(temp, "upor",4)){
-					printf(" inst je %d\n", UPOR);
+					STAMPINST(UPOR);
 					inst[adresa++]=UPOR;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "skok",4)){
-					printf(" inst je %d\n", SKOK);
+					STAMPINST(SKOK);
 					inst[adresa++]=SKOK;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "skv",3)){
-					printf(" inst je %d\n", SKV);
+					STAMPINST(SKV);
 					inst[adresa++]=SKV;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "skj",3)){
-					printf(" inst je %d\n", SKJ);
+					STAMPINST(SKJ);
 					inst[adresa++]=SKJ;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "skn",3)){
-					printf(" inst je %d\n", SKN);
+					STAMPINST(SKN);
 					inst[adresa++]=SKN;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "skp",3)){
-					printf(" inst je %d\n", SKP);
+					STAMPINST(SKP);
 					inst[adresa++]=SKP;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "skor",4)){
-					printf(" inst je %d\n", SKOR);
+					STAMPINST(SKOR);
 					inst[adresa++]=SKP;
 					inst[adresa]=parsujarg(l, temp+5, adresa)-adresa+1;
 					adresa++;
 
 				}else if(!strncmp(temp, "srv",3)){
-					printf(" inst je %d\n", SRV);
+					STAMPINST(SRV);
 					inst[adresa++]=SRV;
 					inst[adresa]=parsujarg(l, temp+4, adresa)-adresa+1;
 					adresa++;
 
 				}else if(!strncmp(temp, "srj",3)){
-					printf(" inst je %d\n", SRJ);
+					STAMPINST(SRJ);
 					inst[adresa++]=SRJ;
 					inst[adresa]=parsujarg(l, temp+4, adresa)-adresa+1;
 					adresa++;
 
 				}else if(!strncmp(temp, "srn",3)){
-					printf(" inst je %d\n", SRN);
+					STAMPINST(SRN);
 					inst[adresa]=SRN;
 					adresa++;
 					inst[adresa]=parsujarg(l, temp+4, adresa)-adresa+1;
 					adresa++;
 
 				}else if(!strncmp(temp, "srp",3)){
-					printf(" inst je %d\n", SRP);
+					STAMPINST(SRP);
 					inst[adresa++]=SRP;
 					inst[adresa]=parsujarg(l, temp+4, adresa)-adresa+1;
 					adresa++;
 
 				}else if(!strncmp(temp, "ucao",4)){
-					printf(" inst je %d\n", UCAO);
+					STAMPINST(UCAO);
 					inst[adresa++]=UCAO;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "uc1o",4)){
-					printf(" inst je %d\n", UC1O);
+					STAMPINST(UC1O);
 					inst[adresa++]=UC1O;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "uc2o",4)){
-					printf(" inst je %d\n", UC2O);
+					STAMPINST(UC2O);
 					inst[adresa++]=UC2O;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "ucaa",4)){
-					printf(" inst je %d\n", UCAA);
+					STAMPINST(UCAA);
 					inst[adresa++]=UCAA;
 
 				}else if(!strncmp(temp, "uca",3)){
-					printf(" inst je %d\n", UCA);
+					STAMPINST(UCA);
 					inst[adresa++]=UCA;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "uc1a",4)){
-					printf(" inst je %d\n", UC1A);
+					STAMPINST(UC1A);
 					inst[adresa++]=UC1A;
 
 				}else if(!strncmp(temp, "uc1",3)){
-					printf(" inst je %d\n", UC1);
+					STAMPINST(UC1);
 					inst[adresa++]=UC1;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "uc2a",4)){
-					printf(" inst je %d\n", UC2A);
+					STAMPINST(UC2A);
 					inst[adresa++]=UC2A;
 
 				}else if(!strncmp(temp, "uc2",3)){
-					printf(" inst je %d\n", UC2);
+					STAMPINST(UC2);
 					inst[adresa++]=UC2;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "uar",3)){
-					printf(" inst je %d\n", UAR);
+					STAMPINST(UAR);
 					inst[adresa++]=UAR;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "u1ra",4)){
-					printf(" inst je %d\n", U1RA);
+					STAMPINST(U1RA);
 					inst[adresa++]=U1RA;
 
 				}else if(!strncmp(temp, "u1r",3)){
-					printf(" inst je %d\n", U1R);
+					STAMPINST(U1R);
 					inst[adresa++]=U1R;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "u2ra",4)){
-					printf(" inst je %d\n", U2RA);
+					STAMPINST(U2RA);
 					inst[adresa++]=U2RA;
 
 				}else if(!strncmp(temp, "u2r",3)){
-					printf(" inst je %d\n", U2R);
+					STAMPINST(U2R);
 					inst[adresa++]=U2R;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "pa1",3)){
-					printf(" inst je %d\n", PA1);
+					STAMPINST(PA1);
 					inst[adresa++]=PA1;
 
 				}else if(!strncmp(temp, "pa2",3)){
-					printf(" inst je %d\n", PA2);
+					STAMPINST(PA2);
 					inst[adresa++]=PA2;
 
 				}else if(!strncmp(temp, "p1a",3)){
-					printf(" inst je %d\n", P1A);
+					STAMPINST(P1A);
 					inst[adresa++]=P1A;
 
 				}else if(!strncmp(temp, "p2a",3)){
-					printf(" inst je %d\n", P2A);
+					STAMPINST(P2A);
 					inst[adresa++]=P2A;
 
 				}else if(!strncmp(temp, "p12",3)){
-					printf(" inst je %d\n", P12);
+					STAMPINST(P12);
 					inst[adresa++]=P12;
 
 				}else if(!strncmp(temp, "p21",3)){
-					printf(" inst je %d\n", P21);
+					STAMPINST(P21);
 					inst[adresa++]=P21;
 
 				}else if(!strncmp(temp, "pas",3)){
-					printf(" inst je %d\n", PAS);
+					STAMPINST(PAS);
 					inst[adresa++]=PAS;
 
 				}else if(!strncmp(temp, "psa",3)){
-					printf(" inst je %d\n", PSA);
+					STAMPINST(PSA);
 					inst[adresa++]=PSA;
 
 				}else if(!strncmp(temp, "pab",3)){
-					printf(" inst je %d\n", PAB);
+					STAMPINST(PAB);
 					inst[adresa++]=PAB;
 
 				}else if(!strncmp(temp, "pba",3)){
-					printf(" inst je %d\n", PBA);
+					STAMPINST(PBA);
 					inst[adresa++]=PBA;
 
 				}else if(!strncmp(temp, "psb",3)){
-					printf(" inst je %d\n", PSB);
+					STAMPINST(PSB);
 					inst[adresa++]=PSB;
 
 				}else if(!strncmp(temp, "pbs",3)){
-					printf(" inst je %d\n", PBS);
+					STAMPINST(PBS);
 					inst[adresa++]=PBS;
 
 				}else if(!strncmp(temp, "doda",4)){
-					printf(" inst je %d\n", DODA);
+					STAMPINST(DODA);
 					inst[adresa++]=DODA;
 
 				}else if(!strncmp(temp, "dod1",4)){
-					printf(" inst je %d\n", DOD1);
+					STAMPINST(DOD1);
 					inst[adresa++]=DOD1;
 
 				}else if(!strncmp(temp, "dod2",4)){
-					printf(" inst je %d\n", DOD2);
+					STAMPINST(DOD2);
 					inst[adresa++]=DOD2;
 
 				}else if(!strncmp(temp, "dodbp",5)){
-					printf(" inst je %d\n", DODBP);
+					STAMPINST(DODBP);
 					inst[adresa++]=DODBP;
 
 				}else if(!strncmp(temp, "vra",3)){
-					printf(" inst je %d\n", VRA);
+					STAMPINST(VRA);
 					inst[adresa++]=VRA;
 
 				}else if(!strncmp(temp, "vr1",3)){
-					printf(" inst je %d\n", VR1);
+					STAMPINST(VR1);
 					inst[adresa++]=VR1;
 
 				}else if(!strncmp(temp, "vr2",3)){
-					printf(" inst je %d\n", VR2);
+					STAMPINST(VR2);
 					inst[adresa++]=VR2;
 
 				}else if(!strncmp(temp, "vrbp",4)){
-					printf(" inst je %d\n", VRBP);
+					STAMPINST(VRBP);
 					inst[adresa++]=VRBP;
 
 				}else if(!strncmp(temp, "fun",3)){
-					printf(" inst je %d\n", FUN);
+					STAMPINST(FUN);
 					inst[adresa++]=FUN;
 					inst[adresa++]=parsujarg(l, temp+4, adresa);
 
 				}else if(!strncmp(temp, "pov",3)){
-					printf(" inst je %d\n", POV);
+					STAMPINST(POV);
 					inst[adresa++]=POV;
 
 				}else if(!strncmp(temp, "dbg",3)){
-					printf(" inst je %d\n", DBG);
+					STAMPINST(DBG);
 					inst[adresa++]=DBG;
 
 				}else if(!strncmp(temp, "ulaa",4)){
-					printf(" inst je %d\n", ULAA);
+					STAMPINST(ULAA);
 					inst[adresa++]=ULAA;
 
 				}else if(!strncmp(temp, "izlaa",5)){
-					printf(" inst je %d\n", IZLAA);
+					STAMPINST(IZLAA);
 					inst[adresa++]=IZLAA;
 
 				}else if(!strncmp(temp, "ulaz",4)){
-					printf(" inst je %d\n", ULAZ);
+					STAMPINST(ULAZ);
 					inst[adresa++]=ULAZ;
 					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "izlaz",5)){
-					printf(" inst je %d\n", IZLAZ);
+					STAMPINST(IZLAZ);
 					inst[adresa++]=IZLAZ;
 					inst[adresa++]=parsujarg(l, temp+6, adresa);
 
 				}else if(!strncmp(temp, "hlt",3)){
-					printf(" inst je %d\n", HLT);
+					STAMPINST(HLT);
 					inst[adresa++]=HLT;
 				}
 
@@ -481,7 +506,9 @@ int main(int argc, const char* argv[]){
 				*(t1-1)='\0';
 				if(t1=strchr(temp, ':')){
 					*t1='\0';
+#if DEBAGOVANJE == 1
 					printf("oznaka:\t%s\n", temp);
+#endif
 					dodhmapa(oznake, temp, NINT, &adresa);
 
 				}else{
@@ -503,35 +530,41 @@ int main(int argc, const char* argv[]){
 
 
 
+#if DEBAGOVANJE == 1
 	putchar('\n');
 	printf("poc: %d\n", pocadr);
+
 	for(int i=pocadr;i<pocadr+20;i++){
 		//printf("%d\n", (uint16_t)inst[i]);
 		printf("%d\n", inst[i]);
 	}
+
 
 	putchar('\n');
 	hstampaj(oznake);
 
 	putchar('\n');
 	lstampaj(l);
-
-#if DEBAGVANJE != 1
-	if (stdizlaz)
-		goto kraj;
 #endif
 
-	for(int i=0; i<NRAM; i++){
+#if DEBAGOVANJE != 1
+	int duzina = NRAM;
+#else
+	int duzina = 20;
+	putchar('\n');
+#endif
+
+
+	for(int i=0; i<duzina; i++){
 		fprintf(iz, "%x\n", (uint16_t)inst[i]);
 	}
-#if DEBAGVANJE == 1
+#if DEBAGOVANJE == 1
 	putchar('\n');
 	for(int i=0; i<100; i++){
-		printf("%d: %d\n", i, (uint16_t)inst[i]);
+		printf("%d:\t%d\t%s\n", i, (uint16_t)inst[i], strinst[inst[i]]);
 	}
 #endif
 
-kraj:
 	if(!stdizlaz)
 		fclose(iz);
 

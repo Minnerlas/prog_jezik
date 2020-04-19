@@ -157,11 +157,7 @@ int main(int argc, const char* argv[]){
 				}else if(!strncmp(temp, "sabr",4)){
 					STAMPINST(SABR);
 					inst[adresa++]=SABR;
-					sscanf(temp+5, "%d", &arg);
-#if DEBAGOVANJE == 1
-					printf(" arg: %d\n", arg);
-#endif
-					inst[adresa++]=arg;
+					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "spb1",4)){
 					STAMPINST(SPB1);
@@ -174,11 +170,7 @@ int main(int argc, const char* argv[]){
 				}else if(!strncmp(temp, "spbr",4)){
 					STAMPINST(SPBR);
 					inst[adresa++]=SPBR;
-					sscanf(temp+5, "%d", &arg);
-#if DEBAGOVANJE == 1
-					printf(" arg: %d\n", arg);
-#endif
-					inst[adresa++]=arg;
+					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "odu1",4)){
 					STAMPINST(ODU1);
@@ -191,11 +183,7 @@ int main(int argc, const char* argv[]){
 				}else if(!strncmp(temp, "odur",4)){
 					STAMPINST(ODUR);
 					inst[adresa++]=ODUR;
-					sscanf(temp+5, "%d", &arg);
-#if DEBAGOVANJE == 1
-					printf(" arg: %d\n", arg);
-#endif
-					inst[adresa++]=arg;
+					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "odp1",4)){
 					STAMPINST(ODP1);
@@ -208,11 +196,7 @@ int main(int argc, const char* argv[]){
 				}else if(!strncmp(temp, "odpr",4)){
 					STAMPINST(ODPR);
 					inst[adresa++]=ODPR;
-					sscanf(temp+5, "%d", &arg);
-#if DEBAGOVANJE == 1
-					printf(" arg: %d\n", arg);
-#endif
-					inst[adresa++]=arg;
+					inst[adresa++]=parsujarg(l, temp+5, adresa);
 
 				}else if(!strncmp(temp, "pla",3)){
 					STAMPINST(PLA);

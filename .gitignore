@@ -1,2 +1,3 @@
 asm/*.prg
 *.s
+front/__pycache__/*

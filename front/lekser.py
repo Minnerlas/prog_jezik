@@ -23,40 +23,40 @@ def greska(linija, tekst):
 
 kljucnereci = {
         # Ključne reči
-        "auto"      :TipTokena.AUTO,
-        "break"     :TipTokena.BREAK,
-        "case"      :TipTokena.CASE,
-        "const"     :TipTokena.CONST,
-        "continue"  :TipTokena.CONTINUE,
-        "default"   :TipTokena.DEFAULT,
-        "do"        :TipTokena.DO,
-        "else"      :TipTokena.ELSE,
-        "enum"      :TipTokena.ENUM,
-        "extern"    :TipTokena.EXTERN,
-        "float"     :TipTokena.FLOAT,
-        "for"       :TipTokena.FOR,
-        "goto"      :TipTokena.GOTO,
-        "if"        :TipTokena.IF,
-        "register"  :TipTokena.REGISTER,
-        "return"    :TipTokena.RETURN,
-        "signed"    :TipTokena.SIGNED,
-        "sizeof"    :TipTokena.SIZEOF,
-        "static"    :TipTokena.STATIC,
-        "struct"    :TipTokena.STRUCT,
-        "switch"    :TipTokena.SWITCH,
-        "typedef"   :TipTokena.TYPEDEF,
-        "union"     :TipTokena.UNION,
-        "unsigned"  :TipTokena.USIGNED,
-        "void"      :TipTokena.VOID,
-        "volatile"  :TipTokena.VOLATILE,
-        "while"     :TipTokena.WHILE,
+        "auto"      : TipTokena.AUTO,
+        "break"     : TipTokena.BREAK,
+        "case"      : TipTokena.CASE,
+        "const"     : TipTokena.CONST,
+        "continue"  : TipTokena.CONTINUE,
+        "default"   : TipTokena.DEFAULT,
+        "do"        : TipTokena.DO,
+        "else"      : TipTokena.ELSE,
+        "enum"      : TipTokena.ENUM,
+        "extern"    : TipTokena.EXTERN,
+        "float"     : TipTokena.FLOAT,
+        "for"       : TipTokena.FOR,
+        "goto"      : TipTokena.GOTO,
+        "if"        : TipTokena.IF,
+        "register"  : TipTokena.REGISTER,
+        "return"    : TipTokena.RETURN,
+        "signed"    : TipTokena.SIGNED,
+        "sizeof"    : TipTokena.SIZEOF,
+        "static"    : TipTokena.STATIC,
+        "struct"    : TipTokena.STRUCT,
+        "switch"    : TipTokena.SWITCH,
+        "typedef"   : TipTokena.TYPEDEF,
+        "union"     : TipTokena.UNION,
+        "unsigned"  : TipTokena.USIGNED,
+        "void"      : TipTokena.VOID,
+        "volatile"  : TipTokena.VOLATILE,
+        "while"     : TipTokena.WHILE,
         
         # Tipovi
-        "char"      :TipTokena.CHAR,
-        "double"    :TipTokena.DOUBLE,
-        "int"       :TipTokena.INT,
-        "long"      :TipTokena.LONG,
-        "short"     :TipTokena.SHORT,
+        "char"      : TipTokena.CHAR,
+        "double"    : TipTokena.DOUBLE,
+        "int"       : TipTokena.INT,
+        "long"      : TipTokena.LONG,
+        "short"     : TipTokena.SHORT,
         }
 
 def leksiranje(ulaz):
@@ -295,6 +295,23 @@ def leksiranje(ulaz):
             else:
                 tokeni+=[(TipTokena.CB, linija, int(tekst))]
 
+        elif c == "'":
+            if sl == '\\':
+                if ulaz[trenutni+2] == '0':
+                    tokeni+=[(TipTokena.CHCONST, linija, 0)]
+                    trenutni+=4
+                elif ulaz[trenutni+2] == 'n':
+                    tokeni+=[(TipTokena.CHCONST, linija, ord('\n'))]
+                    trenutni+=4
+                elif ulaz[trenutni+2] == 't':
+                    tokeni+=[(TipTokena.CHCONST, linija, ord('\t'))]
+                    trenutni+=4
+
+            else:
+                tokeni+=[(TipTokena.CHCONST, linija, ord(sl))]
+                trenutni+=3
+
+
         elif isal(c):
             tekst = ""
             while isalnum(sl):
@@ -327,7 +344,7 @@ def leksiranje(ulaz):
         return None
 
 if __name__ == "__main__":
-    ul = "test.c"
+    ul = "test2.c"
     ulaz =""
 
     with open(ul) as f:
@@ -336,5 +353,7 @@ if __name__ == "__main__":
     a=leksiranje(ulaz) 
     if a:
         for i in leksiranje(ulaz):
+            t = str(i[0])
+            i = t + " "*(25-len(t)) +"\t".join(map(repr, list(i[1:])))
             print(i)
 

@@ -57,6 +57,7 @@ class TipTokena(IntEnum):
     CB          = auto()
     RB          = auto()
     IDENT       = auto()
+    CHCONST     = auto()
 
     # Ključne reči
     AUTO        = auto()

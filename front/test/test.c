@@ -4,6 +4,7 @@ int main(int argc, char** argv) {
 		printf("ASdjasdlkj\n");
 		--a;
 		goto asdasd;
+		putchar('0');
 		exit(1);
 	} else if (a<3){
 		asdasd();

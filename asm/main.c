@@ -6,7 +6,7 @@
 #include "../vm/vm.h"
 #include "../razno/hmapa/hmapa.h"
 
-#define DEBAGOVANJE 0
+#define DEBAGOVANJE 1
 
 #if DEBAGOVANJE == 1
 #include "../vm/dbg.h"
@@ -531,11 +531,11 @@ int main(int argc, const char* argv[]){
 	lstampaj(l);
 #endif
 
-#if DEBAGOVANJE != 1
-	int duzina = NRAM;
-#else
+#if DEBAGOVANJE == 1
 	int duzina = 20;
 	putchar('\n');
+#else
+	int duzina = NRAM;
 #endif
 
 

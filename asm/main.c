@@ -6,7 +6,7 @@
 #include "../vm/vm.h"
 #include "../razno/hmapa/hmapa.h"
 
-#define DEBAGOVANJE 1
+#define DEBAGOVANJE 0
 
 #if DEBAGOVANJE == 1
 #include "../vm/dbg.h"
